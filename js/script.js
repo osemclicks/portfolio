@@ -139,3 +139,45 @@ window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
     header.classList.toggle('sticky', window.scrollY > 0);
 });
+
+// Video slow-start effect
+document.addEventListener('DOMContentLoaded', function() {
+    const desktopVideo = document.querySelector('.desktop-video');
+    const mobileVideo = document.querySelector('.mobile-video');
+    
+    function applySlowStartEffect(videoElement) {
+        if (!videoElement) return;
+        
+        // Start with a very slow playback rate
+        videoElement.playbackRate = 0.2;
+        
+        // Gradually increase the playback rate
+        let currentRate = 0.2;
+        const targetRate = 1.0;
+        const step = 0.05;
+        const interval = 200; // milliseconds
+        
+        const speedInterval = setInterval(() => {
+            currentRate += step;
+            videoElement.playbackRate = currentRate;
+            
+            if (currentRate >= targetRate) {
+                videoElement.playbackRate = targetRate;
+                clearInterval(speedInterval);
+            }
+        }, interval);
+    }
+    
+    // Apply the effect to both videos
+    if (desktopVideo) {
+        desktopVideo.addEventListener('loadedmetadata', function() {
+            applySlowStartEffect(desktopVideo);
+        });
+    }
+    
+    if (mobileVideo) {
+        mobileVideo.addEventListener('loadedmetadata', function() {
+            applySlowStartEffect(mobileVideo);
+        });
+    }
+});
