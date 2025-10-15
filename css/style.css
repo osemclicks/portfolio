@@ -553,6 +553,12 @@ input:focus, textarea:focus {
     display: none;
 }
 
+#form-error {
+    color: #ff3860;
+    background-color: rgba(255, 56, 96, 0.1);
+    display: none;
+}
+
 /* Footer */
 footer {
     background-color: #222;

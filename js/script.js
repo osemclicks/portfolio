@@ -97,11 +97,16 @@ lightbox.addEventListener('click', (e) => {
 const contactForm = document.getElementById('contactForm');
 const nameInput = document.getElementById('name');
 const emailInput = document.getElementById('email');
+const phoneInput = document.getElementById('phone');
 const messageInput = document.getElementById('message');
 const nameError = document.getElementById('name-error');
 const emailError = document.getElementById('email-error');
+const phoneError = document.getElementById('phone-error');
 const messageError = document.getElementById('message-error');
 const formSuccess = document.getElementById('form-success');
+const formError = document.getElementById('form-error');
+
+// 
 
 contactForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -111,14 +116,66 @@ contactForm.addEventListener('submit', (e) => {
     emailError.textContent = '';
     messageError.textContent = '';
     formSuccess.style.display = 'none';
+    formError.style.display = 'none';
     
-    // Display unavailability message
-    formSuccess.textContent = 'This contact form feature is currently unavailable. Please contact us directly at osemclicks@gmail.com or keerthanpoojai2004@gmail.com';
-    formSuccess.style.display = 'block';
+    // Validate form
+    let isValid = true;
     
-    // Reset the form
-    contactForm.reset();
+    if (!nameInput.value.trim()) {
+        nameError.textContent = 'Please enter your name';
+        isValid = false;
+    }
+    
+    if (!emailInput.value.trim()) {
+        emailError.textContent = 'Please enter your email';
+        isValid = false;
+    } else if (!isValidEmail(emailInput.value)) {
+        emailError.textContent = 'Please enter a valid email address';
+        isValid = false;
+    }
+    
+    if (phoneInput.value.trim() && !isValidPhone(phoneInput.value)) {
+        phoneError.textContent = 'Please enter a valid phone number';
+        isValid = false;
+    }
+    
+    if (!messageInput.value.trim()) {
+        messageError.textContent = 'Please enter your message';
+        isValid = false;
+    }
+    
+    if (isValid) {
+        // Show loading state
+        const submitBtn = contactForm.querySelector('button[type="submit"]');
+        const originalBtnText = submitBtn.textContent;
+        submitBtn.textContent = 'Processing...';
+        submitBtn.disabled = true;
+
+        // Email sending disabled; show instructions instead
+        formSuccess.textContent = 'Thank you for reaching out. Please note that online submissions are currently disabled. We kindly request you to contact us via email at osemclicks@gmail.com';
+        formSuccess.style.display = 'block';
+
+        // Reset the form
+        contactForm.reset();
+
+        // Reset button
+        submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+    }
 });
+
+// Email validation function
+function isValidEmail(email) {
+    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+    return emailRegex.test(email);
+}
+
+// Phone validation function
+function isValidPhone(phone) {
+    // Basic phone validation - adjust as needed for your requirements
+    const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+    return phoneRegex.test(phone);
+}
 
 // Create images folder and placeholder profile image
 document.addEventListener('DOMContentLoaded', function() {
