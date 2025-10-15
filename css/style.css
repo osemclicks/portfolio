@@ -588,6 +588,16 @@ footer {
     color: #6c63ff;
 }
 
+.footer-gears a:hover {
+    color: #6c63ff;
+    cursor: pointer;
+}
+
+.gear-links a{
+    color: #fff;
+    margin-left: 15px;
+}
+
 /* Animations */
 @keyframes fadeIn {
     from { opacity: 0; }
