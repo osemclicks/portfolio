@@ -588,14 +588,50 @@ footer {
     color: #6c63ff;
 }
 
+.footer-gears h4 {
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    margin-bottom: 8px;
+}
+
+.footer-gears h4:hover {
+    color: #6c63ff;
+    cursor: pointer;
+}
+
 .footer-gears a:hover {
     color: #6c63ff;
     cursor: pointer;
 }
 
+.gear-links {
+    list-style: none;
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+.gear-links li {
+    margin: 0;
+}
+
 .gear-links a{
     color: #fff;
-    margin-left: 15px;
+    margin-left: 0;
+    display: inline-block;
+    padding: 8px 12px;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    border-radius: 6px;
+    text-decoration: none;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.gear-links a:hover {
+    background-color: rgba(108, 99, 255, 0.15);
+    border-color: #6c63ff;
 }
 
 /* Animations */
