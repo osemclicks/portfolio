@@ -32,6 +32,14 @@ try {
 } catch (PDOException $e) {
     $portfolioItems = [];
 }
+
+// Get latest 3 blog posts for homepage
+try {
+    $stmt = $conn->query("SELECT * FROM blogs ORDER BY created_at DESC LIMIT 3");
+    $latestBlogs = $stmt->fetchAll();
+} catch (PDOException $e) {
+    $latestBlogs = [];
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -63,6 +71,243 @@ try {
         .logo {
             display: flex;
             align-items: center;
+        }
+
+        /* Stats Banner */
+        .stats-banner {
+            background-color: #fff;
+            color: #333;
+            padding: 80px 0;
+            text-align: center;
+        }
+        
+        .stats-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+            color: #666;
+        }
+        
+        .stats-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+        
+        .stats-subtitle {
+            font-size: 1.2rem;
+            margin-bottom: 50px;
+            opacity: 0.9;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+        
+        .stat-item {
+            padding: 20px;
+        }
+        
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: #6c63ff;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .stats-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        
+        /* Services Section */
+        .services-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+        
+        .service-card {
+            background: #f8f9fa;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid #eee;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background: #fff;
+            border-color: transparent;
+        }
+        
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            background: #e0e0ff;
+            color: #6c63ff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin: 0 auto 25px;
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            background: #6c63ff;
+            color: #fff;
+            transform: scale(1.1);
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .service-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        /* Latest Blogs Section */
+        .latest-blogs-section {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .blogs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .blog-card {
+            background: #fff;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .blog-image {
+            height: 200px;
+            overflow: hidden;
+        }
+        
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-card:hover .blog-image img {
+            transform: scale(1.1);
+        }
+        
+        .blog-content {
+            padding: 25px;
+        }
+        
+        .blog-content h3 {
+            font-size: 1.3rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+        
+        .blog-excerpt {
+            color: #666;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .blog-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        .read-more {
+            color: #6c63ff;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .read-more:hover {
+            color: #5a52d5;
+        }
+        
+        /* Final CTA */
+        .final-cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #fff;
+            text-align: center;
+        }
+        
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        
+        .btn-lg {
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            background: #fff;
+            color: #6c63ff;
+        }
+        
+        .btn-lg:hover {
+            background: #f0f0f0;
+            color: #5a52d5;
+            transform: translateY(-3px);
+        }
+        
+        @media (max-width: 768px) {
+            .stats-title { font-size: 2rem; }
+            .stat-number { font-size: 2.5rem; }
+            .stats-actions { flex-direction: column; }
+            .final-cta h2 { font-size: 2rem; }
         }
 
         .logo img {
@@ -118,38 +363,52 @@ try {
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="about">
+    <!-- Services Section -->
+    <section class="services-section">
         <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-image">
-                    <img src="<?php echo asset_url('images/Admin/keerthan2.jpg'); ?>" alt="Keerthan B" id="profile-img">
-                </div>
-                <div class="about-text">
-                    <h3>Keerthan B</h3>
-                    <p class="location"><i class="fas fa-map-marker-alt"></i> Kundapura, Udupi, Karnataka</p>
-                    <p>Hello! I'm Keerthan, a passionate photographer based in the beautiful coastal town of Kundapura.
-                        With my camera, I strive to capture the essence of moments, emotions, and stories that unfold
-                        around us.</p>
-                    <p>My journey in photography began with a simple curiosity that evolved into a profound passion. I
-                        specialize in various photography styles, from capturing the raw emotions in portraits to the
-                        serene beauty of nature.</p>
-                    <p>Every photograph tells a story, and I'm here to tell yours.</p>
-                    <div class="social-links">
-                        <a href=" https://www.instagram.com/keerthan___poojary" target="_blank"><i
-                                class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/profile.php?id=100077017638867" target="_blank"><i
-                                class="fab fa-facebook"></i></a>
-                        <a href="https://youtube.com/@keerthanpoojary_vlogs?si=0UImfSDFr1tQLKyL
-" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-                        <a href=" https://x.com/keerthan__05?s=21
-" target="_blank"><i class="fa-brands fa-twitter"></i></a>
-                        <a href="http://wa.me/6364620304
-" target="_blank"><i class="fa-brands fa-whatsapp"></i>
-                        </a>
+            <h2 class="section-title">Our Services</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: #666; font-size: 1.1rem;">
+                Professional photography and videography services tailored to your needs
+            </p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-camera"></i>
                     </div>
+                    <h3>Photography</h3>
+                    <p>Professional photo shoots for portraits, events, products, and more</p>
                 </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-video"></i>
+                    </div>
+                    <h3>Videography</h3>
+                    <p>Cinematic videos for weddings, events, and commercial projects</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-edit"></i>
+                    </div>
+                    <h3>Photo Editing</h3>
+                    <p>Expert retouching and enhancement to make your photos shine</p>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-calendar-alt"></i>
+                    </div>
+                    <h3>Event Coverage</h3>
+                    <p>Complete coverage of your special moments and celebrations</p>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="<?php echo url('services.php'); ?>" class="btn btn-primary">
+                    <i class="fas fa-info-circle"></i> View All Services
+                </a>
             </div>
         </div>
     </section>
@@ -157,7 +416,10 @@ try {
     <!-- Portfolio Section - MADE DYNAMIC -->
     <section id="portfolio" class="portfolio">
         <div class="container">
-            <h2 class="section-title">Portfolio</h2>
+            <h2 class="section-title">Photographs</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 30px; color: #666; font-size: 1rem;">
+                These photographs are free to use for any non-commercial purpose
+            </p>
             
             <!-- Dynamic Category Filter Buttons -->
             <div class="portfolio-filter">
@@ -171,21 +433,41 @@ try {
             
             <!-- Dynamic Portfolio Grid -->
             <div class="portfolio-grid">
-                <?php if (count($portfolioItems) > 0): ?>
-                    <?php foreach ($portfolioItems as $item): ?>
-                        <div class="portfolio-item <?php echo htmlspecialchars($item['category_slug']); ?>">
-                            <img src="<?php echo htmlspecialchars($item['image_path']); ?>" 
-                                 alt="<?php echo htmlspecialchars($item['title']); ?>">
+                <?php 
+                // Fetch individual images marked for homepage
+                try {
+                    $stmt = $conn->prepare("
+                        SELECT pi.*, p.title as project_title, c.slug as category_slug 
+                        FROM portfolio_images pi
+                        JOIN portfolio p ON pi.portfolio_id = p.id
+                        LEFT JOIN categories c ON p.category_id = c.id
+                        WHERE pi.show_on_homepage = 1
+                        ORDER BY pi.created_at DESC
+                    ");
+                    $stmt->execute();
+                    $homepageImages = $stmt->fetchAll();
+                } catch (PDOException $e) {
+                    $homepageImages = [];
+                }
+                
+                if (count($homepageImages) > 0): ?>
+                    <?php foreach ($homepageImages as $img): ?>
+                        <div class="portfolio-item <?php echo htmlspecialchars($img['category_slug']); ?>" 
+                             data-images='<?php echo htmlspecialchars(json_encode([$img['image_path']])); ?>'
+                             data-title="<?php echo htmlspecialchars($img['project_title']); ?>"
+                             data-description="">
+                            <img src="<?php echo htmlspecialchars($img['image_path']); ?>" 
+                                 alt="<?php echo htmlspecialchars($img['project_title']); ?>">
                             <div class="overlay">
-                                <h3><?php echo htmlspecialchars($item['title']); ?></h3>
-                                <p><?php echo htmlspecialchars($item['category_slug']); ?></p>
+                                <h3><?php echo htmlspecialchars($img['project_title']); ?></h3>
+                                <p><?php echo htmlspecialchars($img['category_slug']); ?></p>
                             </div>
                         </div>
                     <?php endforeach; ?>
                 <?php else: ?>
                     <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #999;">
                         <i class="fas fa-images" style="font-size: 3rem; margin-bottom: 15px;"></i>
-                        <p>Portfolio items coming soon!</p>
+                        <p>No images selected for homepage display.</p>
                     </div>
                 <?php endif; ?>
             </div>
@@ -218,64 +500,83 @@ try {
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
+    <!-- Stats Banner Section -->
+    <section class="stats-banner">
         <div class="container">
-            <h2 class="section-title">Get in Touch</h2>
-            <div class="contact-content">
-                <div class="contact-info">
-                    <div class="info-item">
-                        <i class="fas fa-envelope"></i>
-                        <div>
-                            <h3>Email</h3>
-                            <p>Studio: <a href="mailto:osemclicks@gmail.com">osemclicks@gmail.com</a></p>
-                        </div>
+            <div class="stats-content">
+                <h2 class="stats-title">Capturing Life's Precious Moments</h2>
+                <p class="stats-subtitle">Professional Photography & Videography Services in Kundapura</p>
+                
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Years Experience</div>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-phone"></i>
-                        <div>
-                            <h3>Phone</h3>
-                            <p><a href="tel:+916364620304">+91 63646 20304</a></p>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="500">0</div>
+                        <div class="stat-label">Happy Clients</div>
                     </div>
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h3>Location</h3>
-                            <p>Osem Clicks Studio</p>
-                            <p>Kundapura, Udupi, Karnataka</p>
-                        </div>
+                    <div class="stat-item">
+                        <div class="stat-number" data-target="1000">0</div>
+                        <div class="stat-label">Projects Done</div>
                     </div>
                 </div>
-                <div class="contact-form">
-                    <form id="contactForm">
-                        <input type="hidden" name="csrf_token" value="<?php echo generateCSRFToken(); ?>">
-                        <div class="form-group">
-                            <label for="name">Name</label>
-                            <input type="text" id="name" name="name" required>
-                            <span class="error-message" id="name-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" id="email" name="email" required>
-                            <span class="error-message" id="email-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="phone">Phone (Optional)</label>
-                            <input type="tel" id="phone" name="phone">
-                            <span class="error-message" id="phone-error"></span>
-                        </div>
-                        <div class="form-group">
-                            <label for="message">Message</label>
-                            <textarea id="message" name="message" rows="5" required></textarea>
-                            <span class="error-message" id="message-error"></span>
-                        </div>
-                        <button type="submit" class="btn">Send Message</button>
-                        <div id="form-success" class="success-message"></div>
-                        <div id="form-error" class="error-message"></div>
-                    </form>
+                
+                <div class="stats-actions">
+                    <a href="<?php echo url('portfolio.php'); ?>" class="btn btn-primary">View Portfolio</a>
+                    <a href="<?php echo url('contact.php'); ?>" class="btn btn-secondary">Get in Touch</a>
                 </div>
             </div>
+        </div>
+    </section>
+    
+    <!-- Latest Blogs Section -->
+    <?php if (count($latestBlogs) > 0): ?>
+    <section class="latest-blogs-section">
+        <div class="container">
+            <h2 class="section-title">Latest from Our Blog</h2>
+            <p style="text-align: center; max-width: 700px; margin: 0 auto 50px; color: #666; font-size: 1.1rem;">
+                Tips, tutorials, and stories from our photography journey
+            </p>
+            
+            <div class="blogs-grid">
+                <?php foreach ($latestBlogs as $blog): ?>
+                    <div class="blog-card">
+                        <div class="blog-image">
+                            <img src="<?php echo asset_url($blog['cover_image']); ?>" 
+                                 alt="<?php echo htmlspecialchars($blog['title']); ?>">
+                        </div>
+                        <div class="blog-content">
+                            <h3><?php echo htmlspecialchars($blog['title']); ?></h3>
+                            <p class="blog-excerpt"><?php echo htmlspecialchars($blog['excerpt']); ?></p>
+                            <div class="blog-meta">
+                                <span><i class="far fa-calendar"></i> <?php echo formatDate($blog['created_at']); ?></span>
+                                <a href="blog-detail.php?id=<?php echo $blog['id']; ?>" class="read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            </div>
+            
+            <div style="text-align: center; margin-top: 40px;">
+                <a href="<?php echo url('blogs.php'); ?>" class="btn btn-primary">
+                    <i class="fas fa-blog"></i> View All Blogs
+                </a>
+            </div>
+        </div>
+    </section>
+    <?php endif; ?>
+    
+    <!-- Final CTA Section -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Ready to Capture Your Moments?</h2>
+            <p>Let's create something beautiful together</p>
+            <a href="<?php echo url('contact.php'); ?>" class="btn btn-lg">
+                <i class="fas fa-envelope"></i> Get in Touch
+            </a>
         </div>
     </section>
 
@@ -298,8 +599,50 @@ try {
         </div>
     </footer>
 
+
+
     <script src="<?php echo asset_url('js/script.js'); ?>"></script>
-    <script src="<?php echo asset_url('js/contact.js'); ?>"></script>
+
+    <script>
+        // Stats Counter Animation
+        const statsSection = document.querySelector('.stats-banner');
+        const stats = document.querySelectorAll('.stat-number');
+        let started = false;
+
+        const startCounting = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting && !started) {
+                    stats.forEach(stat => {
+                        const target = +stat.getAttribute('data-target');
+                        const duration = 2000; // 2 seconds
+                        const increment = target / (duration / 16); // 60fps
+                        
+                        let current = 0;
+                        const updateCount = () => {
+                            current += increment;
+                            if (current < target) {
+                                stat.innerText = Math.ceil(current) + "+";
+                                requestAnimationFrame(updateCount);
+                            } else {
+                                stat.innerText = target + "+";
+                            }
+                        };
+                        updateCount();
+                    });
+                    started = true;
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(startCounting, {
+            root: null,
+            threshold: 0.5
+        });
+
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+    </script>
 </body>
 
 </html>

@@ -95,27 +95,6 @@ $pageTitle = 'Contact Us - ' . SITE_NAME;
         </div>
     </section>
     
-    <!-- Gears Section -->
-    <?php if (count($gears) > 0): ?>
-        <section class="support" style="background: #f5f5f5;">
-            <div class="container">
-                <h2 class="section-title">Gears We Use</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 30px;">
-                    <?php foreach ($gears as $gear): ?>
-                        <div style="background: #fff; padding: 20px; border-radius: 10px; text-align: center; box-shadow: 0 3px 10px rgba(0,0,0,0.1);">
-                            <h3 style="margin-bottom: 15px; font-size: 1.1rem;"><?php echo htmlspecialchars($gear['name']); ?></h3>
-                            <?php if (!empty($gear['affiliate_link'])): ?>
-                                <a href="<?php echo htmlspecialchars($gear['affiliate_link']); ?>" target="_blank" class="btn" style="font-size: 0.9rem;">
-                                    View Product <i class="fas fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                                </a>
-                            <?php endif; ?>
-                        </div>
-                    <?php endforeach; ?>
-                </div>
-            </div>
-        </section>
-    <?php endif; ?>
-    
     <?php include 'includes/footer.php'; ?>
     
     <script src="<?php echo asset_url('js/script.js'); ?>"></script>

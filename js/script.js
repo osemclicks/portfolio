@@ -67,20 +67,87 @@ filterBtns.forEach(btn => {
 });
 
 // Lightbox
-const portfolioImages = document.querySelectorAll('.portfolio-item img');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = document.getElementById('lightbox-img');
 const lightboxCaption = document.getElementById('lightbox-caption');
 const close = document.querySelector('.close');
 
-portfolioImages.forEach(img => {
-    img.addEventListener('click', () => {
-        lightbox.style.display = 'block';
-        lightboxImg.src = img.src;
-        const title = img.parentElement.querySelector('.overlay h3').textContent;
-        const category = img.parentElement.querySelector('.overlay p').textContent;
-        lightboxCaption.textContent = `${title} - ${category}`;
+// Create navigation buttons
+const prevBtn = document.createElement('a');
+prevBtn.className = 'prev';
+prevBtn.innerHTML = '&#10094;';
+lightbox.appendChild(prevBtn);
+
+const nextBtn = document.createElement('a');
+nextBtn.className = 'next';
+nextBtn.innerHTML = '&#10095;';
+lightbox.appendChild(nextBtn);
+
+let currentImages = [];
+let currentIndex = 0;
+
+portfolioItems.forEach(item => {
+    item.addEventListener('click', (e) => {
+        // Prevent default link behavior if it's an anchor tag
+        if (item.tagName === 'A') {
+            e.preventDefault();
+        }
+        
+        const imagesData = item.getAttribute('data-images');
+        const title = item.getAttribute('data-title');
+        const description = item.getAttribute('data-description');
+        
+        if (imagesData) {
+            currentImages = JSON.parse(imagesData);
+            currentIndex = 0;
+            showImage(currentIndex, title, description);
+            lightbox.style.display = 'block';
+        } else {
+            // Fallback for items without data-images (e.g. from portfolio.php if not updated, or related items)
+            // But we updated portfolio.php to use data-images? No, we didn't update portfolio.php to use data-images yet.
+            // We updated portfolio-detail.php.
+            // Wait, portfolio.php links to detail page. If we want lightbox there, we need to update it.
+            // For now, let's allow default behavior if no data-images
+            if (item.tagName === 'A') {
+                window.location.href = item.href;
+            }
+        }
     });
+});
+
+function showImage(index, title, description) {
+    if (index >= currentImages.length) currentIndex = 0;
+    if (index < 0) currentIndex = currentImages.length - 1;
+    
+    lightboxImg.src = currentImages[currentIndex];
+    
+    let captionHtml = `<h3>${title}</h3>`;
+    if (description) {
+        captionHtml += `<p>${description}</p>`;
+    }
+    if (currentImages.length > 1) {
+        captionHtml += `<span class="counter">${currentIndex + 1} / ${currentImages.length}</span>`;
+    }
+    
+    lightboxCaption.innerHTML = captionHtml;
+}
+
+prevBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex--;
+    const title = lightboxCaption.querySelector('h3').textContent;
+    const descEl = lightboxCaption.querySelector('p');
+    const description = descEl ? descEl.textContent : '';
+    showImage(currentIndex, title, description);
+});
+
+nextBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    currentIndex++;
+    const title = lightboxCaption.querySelector('h3').textContent;
+    const descEl = lightboxCaption.querySelector('p');
+    const description = descEl ? descEl.textContent : '';
+    showImage(currentIndex, title, description);
 });
 
 close.addEventListener('click', () => {
@@ -95,74 +162,74 @@ lightbox.addEventListener('click', (e) => {
 
 // Form Validation
 const contactForm = document.getElementById('contactForm');
-const nameInput = document.getElementById('name');
-const emailInput = document.getElementById('email');
-const phoneInput = document.getElementById('phone');
-const messageInput = document.getElementById('message');
-const nameError = document.getElementById('name-error');
-const emailError = document.getElementById('email-error');
-const phoneError = document.getElementById('phone-error');
-const messageError = document.getElementById('message-error');
-const formSuccess = document.getElementById('form-success');
-const formError = document.getElementById('form-error');
+if (contactForm) {
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const messageInput = document.getElementById('message');
+    const nameError = document.getElementById('name-error');
+    const emailError = document.getElementById('email-error');
+    const phoneError = document.getElementById('phone-error');
+    const messageError = document.getElementById('message-error');
+    const formSuccess = document.getElementById('form-success');
+    const formError = document.getElementById('form-error');
 
-// 
+    contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // Reset errors
+        nameError.textContent = '';
+        emailError.textContent = '';
+        messageError.textContent = '';
+        formSuccess.style.display = 'none';
+        formError.style.display = 'none';
+        
+        // Validate form
+        let isValid = true;
+        
+        if (!nameInput.value.trim()) {
+            nameError.textContent = 'Please enter your name';
+            isValid = false;
+        }
+        
+        if (!emailInput.value.trim()) {
+            emailError.textContent = 'Please enter your email';
+            isValid = false;
+        } else if (!isValidEmail(emailInput.value)) {
+            emailError.textContent = 'Please enter a valid email address';
+            isValid = false;
+        }
+        
+        if (phoneInput.value.trim() && !isValidPhone(phoneInput.value)) {
+            phoneError.textContent = 'Please enter a valid phone number';
+            isValid = false;
+        }
+        
+        if (!messageInput.value.trim()) {
+            messageError.textContent = 'Please enter your message';
+            isValid = false;
+        }
+        
+        if (isValid) {
+            // Show loading state
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const originalBtnText = submitBtn.textContent;
+            submitBtn.textContent = 'Processing...';
+            submitBtn.disabled = true;
 
-contactForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    
-    // Reset errors
-    nameError.textContent = '';
-    emailError.textContent = '';
-    messageError.textContent = '';
-    formSuccess.style.display = 'none';
-    formError.style.display = 'none';
-    
-    // Validate form
-    let isValid = true;
-    
-    if (!nameInput.value.trim()) {
-        nameError.textContent = 'Please enter your name';
-        isValid = false;
-    }
-    
-    if (!emailInput.value.trim()) {
-        emailError.textContent = 'Please enter your email';
-        isValid = false;
-    } else if (!isValidEmail(emailInput.value)) {
-        emailError.textContent = 'Please enter a valid email address';
-        isValid = false;
-    }
-    
-    if (phoneInput.value.trim() && !isValidPhone(phoneInput.value)) {
-        phoneError.textContent = 'Please enter a valid phone number';
-        isValid = false;
-    }
-    
-    if (!messageInput.value.trim()) {
-        messageError.textContent = 'Please enter your message';
-        isValid = false;
-    }
-    
-    if (isValid) {
-        // Show loading state
-        const submitBtn = contactForm.querySelector('button[type="submit"]');
-        const originalBtnText = submitBtn.textContent;
-        submitBtn.textContent = 'Processing...';
-        submitBtn.disabled = true;
+            // Email sending disabled; show instructions instead
+            formSuccess.textContent = 'Thank you for reaching out. Please note that online submissions are currently disabled. We kindly request you to contact us via email at osemclicks@gmail.com';
+            formSuccess.style.display = 'block';
 
-        // Email sending disabled; show instructions instead
-        formSuccess.textContent = 'Thank you for reaching out. Please note that online submissions are currently disabled. We kindly request you to contact us via email at osemclicks@gmail.com';
-        formSuccess.style.display = 'block';
+            // Reset the form
+            contactForm.reset();
 
-        // Reset the form
-        contactForm.reset();
-
-        // Reset button
-        submitBtn.textContent = originalBtnText;
-        submitBtn.disabled = false;
-    }
-});
+            // Reset button
+            submitBtn.textContent = originalBtnText;
+            submitBtn.disabled = false;
+        }
+    });
+}
 
 // Email validation function
 function isValidEmail(email) {
@@ -181,9 +248,11 @@ function isValidPhone(phone) {
 document.addEventListener('DOMContentLoaded', function() {
     // Set a placeholder image for profile if it doesn't load
     const profileImg = document.getElementById('profile-img');
-    profileImg.onerror = function() {
-        this.src = 'jmages/Nature/6.JPG';
-    };
+    if (profileImg) {
+        profileImg.onerror = function() {
+            this.src = 'jmages/Nature/6.JPG';
+        };
+    }
 });
 
 // Scroll to top when page is refreshed
@@ -194,7 +263,9 @@ window.onbeforeunload = function() {
 // Sticky header
 window.addEventListener('scroll', function() {
     const header = document.querySelector('header');
-    header.classList.toggle('sticky', window.scrollY > 0);
+    if (header) {
+        header.classList.toggle('sticky', window.scrollY > 0);
+    }
 });
 
 // Video slow-start effect

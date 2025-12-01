@@ -40,33 +40,77 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors[] = 'Please select a category.';
     }
     
-    if (!isset($_FILES['image']) || $_FILES['image']['error'] === UPLOAD_ERR_NO_FILE) {
-        $errors[] = 'Image is required.';
+    if (!isset($_FILES['project_images']) || empty($_FILES['project_images']['name'][0])) {
+        $errors[] = 'At least one image is required.';
     }
     
     // If no errors, process upload and insert
     if (empty($errors)) {
-        $uploadResult = uploadImage($_FILES['image'], PORTFOLIO_UPLOAD_DIR);
-        
-        if ($uploadResult['success']) {
-            $imagePath = 'uploads/portfolio/' . $uploadResult['filename'];
+        try {
+            $conn->beginTransaction();
+
+            // 1. Upload all images
+            $uploadedImages = [];
+            $files = $_FILES['project_images'];
+            $fileCount = count($files['name']);
             
-            try {
-                $stmt = $conn->prepare("
-                    INSERT INTO portfolio (title, image_path, category_id, description) 
-                    VALUES (?, ?, ?, ?)
-                ");
-                $stmt->execute([$title, $imagePath, $category_id, $description]);
-                
-                setFlash('success', 'Portfolio item added successfully!');
-                redirect(ADMIN_URL . '/portfolio/index.php');
-            } catch (PDOException $e) {
-                $errors[] = 'Failed to save portfolio item.';
-                // Delete uploaded file if database insert fails
-                deleteFile(PORTFOLIO_UPLOAD_DIR . $uploadResult['filename']);
+            for ($i = 0; $i < $fileCount; $i++) {
+                if ($files['error'][$i] === UPLOAD_ERR_OK) {
+                    $fileData = [
+                        'name' => $files['name'][$i],
+                        'type' => $files['type'][$i],
+                        'tmp_name' => $files['tmp_name'][$i],
+                        'error' => $files['error'][$i],
+                        'size' => $files['size'][$i]
+                    ];
+                    
+                    $uploadResult = uploadImage($fileData, PORTFOLIO_UPLOAD_DIR);
+                    if ($uploadResult['success']) {
+                        $uploadedImages[] = 'uploads/portfolio/' . $uploadResult['filename'];
+                    } else {
+                        throw new Exception("Error uploading file {$files['name'][$i]}: " . $uploadResult['message']);
+                    }
+                }
             }
-        } else {
-            $errors[] = $uploadResult['message'];
+            
+            if (empty($uploadedImages)) {
+                throw new Exception("No images were successfully uploaded.");
+            }
+
+            // 2. Insert Portfolio Item (using first image as cover)
+            $coverImage = $uploadedImages[0];
+            
+            $stmt = $conn->prepare("
+                INSERT INTO portfolio (title, image_path, category_id, description) 
+                VALUES (?, ?, ?, ?)
+            ");
+            $stmt->execute([$title, $coverImage, $category_id, $description]);
+            $portfolioId = $conn->lastInsertId();
+            
+            // 3. Insert into portfolio_images table
+            $showOnHomepage = isset($_POST['show_on_homepage']) ? 1 : 0;
+            
+            $stmtImage = $conn->prepare("
+                INSERT INTO portfolio_images (portfolio_id, image_path, display_order, show_on_homepage) 
+                VALUES (?, ?, ?, ?)
+            ");
+            
+            foreach ($uploadedImages as $index => $imagePath) {
+                $stmtImage->execute([$portfolioId, $imagePath, $index, $showOnHomepage]);
+            }
+            
+            $conn->commit();
+            setFlash('success', 'Portfolio item added successfully!');
+            redirect(ADMIN_URL . '/portfolio/index.php');
+            
+        } catch (Exception $e) {
+            $conn->rollBack();
+            $errors[] = $e->getMessage();
+            
+            // Cleanup uploaded files
+            foreach ($uploadedImages as $img) {
+                deleteFile('../' . $img); // Adjust path as needed based on where deleteFile looks
+            }
         }
     }
 }
@@ -127,8 +171,17 @@ $csrf_token = generateCSRFToken();
                         </div>
                         
                         <div class="form-group">
-                            <label for="image">Image * (Max 5MB, JPG/PNG/GIF)</label>
-                            <input type="file" id="image" name="image" accept="image/*" required>
+                            <label for="image">Images * (Select multiple, Max 5MB each)</label>
+                            <input type="file" id="image" name="project_images[]" accept="image/*" multiple required>
+                            <small class="form-text text-muted">The first selected image will be the cover image.</small>
+                        </div>
+
+                        <div class="form-group" style="margin-bottom: 20px;">
+                            <label class="checkbox-container">
+                                <input type="checkbox" name="show_on_homepage" value="1" checked>
+                                <span class="checkmark"></span>
+                                Show uploaded photos on homepage "Photographs" section
+                            </label>
                         </div>
                         
                         <div class="form-group">

@@ -476,21 +476,6 @@ header .hamburger.active .line:nth-child(3) {
     right: 35px;
     color: #f1f1f1;
     font-size: 40px;
-    font-weight: bold;
-    transition: 0.3s;
-    cursor: pointer;
-}
-
-.close:hover,
-.close:focus {
-    color: #bbb;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-/* Support Section */
-.support {
-    text-align: center;
     background-color: #fff;
 }
 
@@ -501,6 +486,7 @@ header .hamburger.active .line:nth-child(3) {
 }
 
 .coffee-btn {
+    margin: 0 40%;
     display: inline-block;
     background-color: #FFDD00;
     color: #000;

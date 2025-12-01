@@ -83,6 +83,28 @@ $pageTitle = htmlspecialchars($item['title']) . ' - Portfolio - ' . SITE_NAME;
                         <p style="line-height: 1.8; color: #555;"><?php echo nl2br(htmlspecialchars($item['description'])); ?></p>
                     </div>
                 <?php endif; ?>
+
+                <?php 
+                // Get additional images
+                $stmtImages = $conn->prepare("SELECT * FROM portfolio_images WHERE portfolio_id = ? ORDER BY display_order ASC");
+                $stmtImages->execute([$id]);
+                $additionalImages = $stmtImages->fetchAll();
+                ?>
+
+                <?php if (count($additionalImages) > 0): ?>
+                    <h3 style="margin-bottom: 20px;">Project Gallery</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 50px;">
+                        <?php foreach ($additionalImages as $img): ?>
+                            <div style="border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+                                <img src="<?php echo asset_url($img['image_path']); ?>" 
+                                     alt="Project Image"
+                                     style="width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.3s ease;"
+                                     onmouseover="this.style.transform='scale(1.05)'"
+                                     onmouseout="this.style.transform='scale(1)'">
+                            </div>
+                        <?php endforeach; ?>
+                    </div>
+                <?php endif; ?>
                 
                 <?php if (count($relatedItems) > 0): ?>
                     <h3 style="margin-top: 60px; margin-bottom: 30px; font-size: 1.8rem;">Related Work</h3>
