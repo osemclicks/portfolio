@@ -1,0 +1,25 @@
+/* Logo Styling Fix */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+}
+
+.logo h1 {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Ensure header container has proper height */
+header .container {
+    height: 80px;
+
+}
