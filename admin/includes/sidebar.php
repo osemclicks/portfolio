@@ -72,6 +72,13 @@
             </a>
         </div>
         
+        <div class="nav-item">
+            <a href="<?php echo ADMIN_URL; ?>/team/index.php" class="nav-link <?php echo strpos($_SERVER['PHP_SELF'], '/team/') !== false ? 'active' : ''; ?>">
+                <i class="fas fa-users"></i>
+                <span>Manage Team</span>
+            </a>
+        </div>
+        
         <div class="nav-section-title">Settings</div>
         
         <div class="nav-item">
