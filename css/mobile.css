@@ -1,0 +1,878 @@
+/* ============================================
+   MOBILE RESPONSIVE STYLES
+   Osem Clicks Photography Portfolio
+   ============================================ */
+
+/* ============================================
+   TABLET & BELOW (992px and below)
+   ============================================ */
+@media (max-width: 992px) {
+    /* Container adjustments */
+    .container {
+        width: 95%;
+        padding: 0 15px;
+    }
+
+    /* Typography */
+    .section-title {
+        font-size: 2rem;
+        margin-bottom: 35px;
+    }
+
+    /* About Section */
+    .about-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .about-image,
+    .about-text {
+        width: 100%;
+    }
+
+    /* Contact Section */
+    .contact-content {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* Blog Grid */
+    .blogs-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+
+    /* Hero Section */
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+
+    .hero-content p {
+        font-size: 1.1rem;
+    }
+
+    /* Stats Section */
+    .stats-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+    }
+
+    .stat-number {
+        font-size: 3rem;
+    }
+}
+
+/* ============================================
+   MOBILE (768px and below)
+   ============================================ */
+@media (max-width: 768px) {
+    /* Section Padding */
+    section {
+        padding: 60px 0;
+    }
+
+    /* Header Adjustments */
+    header {
+        padding: 3px 0;
+    }
+
+    /* Typography */
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 30px;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 70vh;
+        min-height: 500px;
+    }
+
+    .hero-content h1 {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 10px 25px;
+        font-size: 0.85rem;
+    }
+
+    .btn-lg {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+
+    /* Portfolio Grid */
+    .portfolio-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .portfolio-item {
+        height: 250px;
+    }
+
+    /* Portfolio Filter */
+    .portfolio-filter {
+        gap: 8px;
+        margin-bottom: 30px;
+    }
+
+    .filter-btn {
+        padding: 8px 18px;
+        font-size: 0.85rem;
+    }
+
+    /* Services Grid */
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .service-card {
+        padding: 35px 25px;
+    }
+
+    .service-icon {
+        width: 70px;
+        height: 70px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+    }
+
+    /* Blog Grid */
+    .blogs-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .blog-image {
+        height: 180px;
+    }
+
+    .blog-content {
+        padding: 20px;
+    }
+
+    .blog-content h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Stats Section */
+    .stats-banner {
+        padding: 60px 0;
+    }
+
+    .stats-title {
+        font-size: 1.8rem;
+    }
+
+    .stats-subtitle {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 25px;
+        margin-bottom: 30px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+    }
+
+    .stat-label {
+        font-size: 0.95rem;
+    }
+
+    .stats-actions {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .stats-actions .btn {
+        width: 100%;
+        max-width: 250px;
+    }
+
+    /* Contact Form */
+    .contact-form {
+        margin-top: 30px;
+    }
+
+    .info-item {
+        margin-bottom: 25px;
+    }
+
+    .info-item i {
+        font-size: 1.3rem;
+        width: 35px;
+        height: 35px;
+    }
+
+    input,
+    textarea {
+        padding: 10px;
+        font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 25px;
+    }
+
+    .footer-gears {
+        margin: 20px 0;
+    }
+
+    .footer-social {
+        justify-content: center;
+        margin-top: 15px;
+    }
+
+    /* Final CTA */
+    .final-cta {
+        padding: 70px 0;
+    }
+
+    .final-cta h2 {
+        font-size: 2rem;
+    }
+
+    .final-cta p {
+        font-size: 1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Search Bar */
+    .search-bar {
+        max-width: 100%;
+        margin-bottom: 25px;
+    }
+
+    .search-bar input {
+        padding: 12px 45px 12px 15px;
+        font-size: 0.95rem;
+    }
+
+    .search-bar button {
+        width: 40px;
+        height: 40px;
+    }
+
+    /* Pagination */
+    .pagination {
+        gap: 8px;
+        margin-top: 30px;
+        flex-wrap: wrap;
+    }
+
+    .pagination a,
+    .pagination span {
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+
+    /* Portfolio Detail */
+    .portfolio-detail-container {
+        padding: 20px;
+    }
+
+    .portfolio-detail h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .detail-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    /* Featured Image */
+    .featured-image {
+        height: 300px;
+        margin-bottom: 25px;
+    }
+
+    /* Gallery Grid */
+    .gallery-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    /* Blog Detail */
+    .blog-detail-content {
+        padding: 20px 0;
+    }
+
+    .blog-detail h1 {
+        font-size: 1.8rem;
+        margin-bottom: 15px;
+    }
+
+    .blog-detail-meta {
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 20px;
+    }
+
+    .blog-cover-image {
+        height: 250px;
+        margin-bottom: 25px;
+    }
+
+    /* FAQ */
+    .faq-item {
+        margin-bottom: 15px;
+    }
+
+    .faq-question {
+        padding: 15px;
+        font-size: 1rem;
+    }
+
+    .faq-answer {
+        padding: 15px;
+        font-size: 0.95rem;
+    }
+
+    /* About Team Grid */
+    .team-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .team-member {
+        padding: 25px;
+    }
+
+    /* Coffee Button */
+    .coffee-btn {
+        margin: 0 auto;
+        display: block;
+        width: fit-content;
+    }
+}
+
+/* ============================================
+   SMALL MOBILE (576px and below)
+   ============================================ */
+@media (max-width: 576px) {
+    /* Container */
+    .container {
+        width: 100%;
+        padding: 0 15px;
+    }
+
+    /* Section Padding */
+    section {
+        padding: 50px 0;
+    }
+
+    /* Typography */
+    .section-title {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+        padding-bottom: 12px;
+    }
+
+    .section-title::after {
+        width: 50px;
+        height: 2px;
+    }
+
+    /* Hero Section */
+    .hero {
+        height: 60vh;
+        min-height: 450px;
+        margin-top: 70px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+
+    .hero-content p {
+        font-size: 0.95rem;
+        margin-bottom: 20px;
+    }
+
+    /* Header Logo */
+    header .logo {
+        gap: 8px;
+    }
+
+    header .logo h1 {
+        font-size: 1rem;
+        margin: 0;
+    }
+
+    header .logo img {
+        height: 45px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    /* Portfolio Item */
+    .portfolio-item {
+        height: 220px;
+    }
+
+    .overlay h3 {
+        font-size: 1.1rem;
+    }
+
+    .overlay p {
+        font-size: 0.85rem;
+    }
+
+    /* Portfolio Filter */
+    .portfolio-filter {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .filter-btn {
+        width: 100%;
+        max-width: 250px;
+        margin: 0;
+    }
+
+    /* Service Card */
+    .service-card {
+        padding: 30px 20px;
+    }
+
+    .service-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+
+    .service-card p {
+        font-size: 0.95rem;
+    }
+
+    .service-icon {
+        width: 65px;
+        height: 65px;
+        font-size: 1.6rem;
+    }
+
+    /* Blog Card */
+    .blog-image {
+        height: 160px;
+    }
+
+    .blog-content {
+        padding: 18px;
+    }
+
+    .blog-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+
+    .blog-excerpt {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    .blog-meta {
+        font-size: 0.85rem;
+        padding-top: 12px;
+    }
+
+    /* Stats Section */
+    .stats-banner {
+        padding: 50px 0;
+    }
+
+    .stats-title {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+
+    .stats-subtitle {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 25px;
+    }
+
+    .stat-item {
+        padding: 15px;
+    }
+
+    .stat-number {
+        font-size: 2.2rem;
+        margin-bottom: 8px;
+    }
+
+    .stat-label {
+        font-size: 0.9rem;
+    }
+
+    /* Buttons */
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.8rem;
+    }
+
+    .btn-lg {
+        padding: 12px 25px;
+        font-size: 0.95rem;
+    }
+
+    /* Contact Section */
+    .info-item h3 {
+        font-size: 1.1rem;
+        margin-bottom: 3px;
+    }
+
+    .info-item p,
+    .info-item a {
+        font-size: 0.9rem;
+    }
+
+    /* Form Elements */
+    input,
+    textarea {
+        padding: 10px;
+        font-size: 0.9rem;
+    }
+
+    label {
+        font-size: 0.95rem;
+    }
+
+    /* Footer */
+    .footer-logo h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-logo p {
+        font-size: 0.85rem;
+    }
+
+    .footer-gears h4 {
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+
+    .gear-links {
+        gap: 8px;
+    }
+
+    .gear-links a {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+
+    .footer-social a {
+        width: 38px;
+        height: 38px;
+        font-size: 1.1rem;
+    }
+
+    /* Final CTA */
+    .final-cta {
+        padding: 60px 0;
+    }
+
+    .final-cta h2 {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+    }
+
+    .final-cta p {
+        font-size: 0.95rem;
+        margin-bottom: 25px;
+    }
+
+    /* Search Bar */
+    .search-bar input {
+        padding: 10px 40px 10px 12px;
+        font-size: 0.9rem;
+    }
+
+    .search-bar button {
+        width: 35px;
+        height: 35px;
+        font-size: 0.9rem;
+    }
+
+    /* Pagination */
+    .pagination a,
+    .pagination span {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+
+    /* Portfolio Detail */
+    .portfolio-detail h1,
+    .blog-detail h1 {
+        font-size: 1.6rem;
+    }
+
+    .detail-description,
+    .blog-detail-content {
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .featured-image,
+    .blog-cover-image {
+        height: 220px;
+    }
+
+    /* Lightbox */
+    .lightbox-content {
+        max-width: 95%;
+        max-height: 85%;
+    }
+
+    .close {
+        font-size: 35px;
+        right: 20px;
+        top: 10px;
+    }
+
+    #lightbox-caption {
+        font-size: 0.9rem;
+        padding: 8px 0;
+    }
+
+    /* FAQ */
+    .faq-question {
+        padding: 12px;
+        font-size: 0.95rem;
+    }
+
+    .faq-answer {
+        padding: 12px;
+        font-size: 0.9rem;
+        line-height: 1.6;
+    }
+
+    .faq-icon {
+        font-size: 0.9rem;
+    }
+}
+
+/* ============================================
+   EXTRA SMALL MOBILE (480px and below)
+   ============================================ */
+@media (max-width: 480px) {
+    /* Hero Section */
+    .hero {
+        height: 55vh;
+        min-height: 400px;
+    }
+
+    .hero-content h1 {
+        font-size: 1.6rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+    }
+
+    /* Section Titles */
+    .section-title {
+        font-size: 1.5rem;
+    }
+
+    /* Header Logo - Extra Small */
+    header .logo {
+        gap: 6px;
+    }
+
+    header .logo h1 {
+        font-size: 0.9rem;
+        margin: 0;
+    }
+
+    header .logo img {
+        height: 40px;
+        width: auto;
+        object-fit: contain;
+    }
+
+    header {
+        padding: 3px 0;
+    }
+
+    /* Portfolio Item */
+    .portfolio-item {
+        height: 200px;
+    }
+
+    /* Stats */
+    .stat-number {
+        font-size: 2rem;
+    }
+
+    .stats-title {
+        font-size: 1.4rem;
+    }
+
+    /* Service Cards */
+    .service-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+
+    .service-card h3 {
+        font-size: 1.2rem;
+    }
+
+    /* Blog */
+    .blog-image {
+        height: 140px;
+    }
+
+    /* Final CTA */
+    .final-cta h2 {
+        font-size: 1.6rem;
+    }
+
+    /* Contact */
+    .info-item {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .info-item i {
+        margin-bottom: 10px;
+        margin-right: 0;
+    }
+}
+
+/* ============================================
+   TOUCH IMPROVEMENTS
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+    /* Ensure tap targets are at least 44x44px */
+    .btn,
+    .filter-btn,
+    .nav-links a,
+    .footer-social a,
+    .pagination a,
+    input[type="submit"],
+    button {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    /* Remove hover effects on touch devices */
+    .portfolio-item:hover img {
+        transform: none;
+    }
+
+    .portfolio-item .overlay {
+        opacity: 0.9;
+    }
+
+    /* Make links easier to tap */
+    a {
+        padding: 5px;
+        margin: -5px;
+    }
+
+    /* Improve form inputs on mobile */
+    input,
+    textarea,
+    select {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+}
+
+/* ============================================
+   LANDSCAPE ORIENTATION (Mobile)
+   ============================================ */
+@media (max-height: 500px) and (orientation: landscape) {
+    .hero {
+        height: 100vh;
+        min-height: auto;
+    }
+
+    .hero-content h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+    }
+
+    section {
+        padding: 40px 0;
+    }
+}
+
+/* ============================================
+   ACCESSIBILITY IMPROVEMENTS
+   ============================================ */
+@media (max-width: 768px) {
+    /* Improve focus visibility */
+    a:focus,
+    button:focus,
+    input:focus,
+    textarea:focus {
+        outline: 2px solid #6c63ff;
+        outline-offset: 2px;
+    }
+
+    /* Ensure sufficient line height for readability */
+    p,
+    li {
+        line-height: 1.6;
+    }
+
+    /* Improve text contrast in overlays */
+    .overlay {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.9), transparent);
+    }
+}
